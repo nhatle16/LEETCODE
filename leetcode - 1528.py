@@ -6,6 +6,8 @@ def restoreString(s,indices):
     
     for letter, idx in zip(s, indices):
         lis[idx] = letter
+    
+    print(lis)
         
     return ''.join(lis)
 

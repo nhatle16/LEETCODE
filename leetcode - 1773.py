@@ -11,7 +11,7 @@ def countMatches(items, ruleKey, ruleValue):
     return match
 
 items = [["phone","blue","pixel"],["computer","silver","lenovo"],["phone","gold","iphone"]]
-key = "type"
-value = "phone"
+key = "color"
+value = "gold"
 
 print(countMatches(items, key, value))

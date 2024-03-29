@@ -1,10 +1,30 @@
-# Add 1 to an array of integer
+# https://leetcode.com/problems/plus-one/submissions/1205613645/
 
-def plusOne(digits):
-    digits = digits[::-1]
-    one, i = True, 0
+def PlusOne(digits: list) -> list:
+    one: int = 1    # create a carry
+    i: int = len(digits)-1    # index in the list
     
-    while one:
+    while i >= 0:
+        current = digits[i] + one
+        digits[i] = current % 10
+        one = current // 10
+        
+        if one == 0:
+            break
+        
+        i -= 1
+    
+    if one == 1:
+        digits.insert(0, one)
+        
+    return digits
+
+def PlusOne2(digits: list) -> list:
+    one: bool = True # create a carry
+    i: int = 0      # index in the list
+    digits = digits[::-1]
+    
+    while one:  # while the carry still exists
         if i < len(digits):
             if digits[i] == 9:
                 digits[i] = 0
@@ -12,38 +32,16 @@ def plusOne(digits):
                 digits[i] += 1
                 one = False
                 
+            i += 1
+
         else:
             digits.append(1)
             one = False
-            
-        i += 1
         
     return digits[::-1]
 
-# 2nd version without reversing the list
-
-def plusOne2(digits):
-    one = 1
-    i = len(digits) - 1
-    
-    while i >= 0:
-        cur = digits[i] + one
-       
-        digits[i] = cur % 10
-        one = cur // 10
-        
-        if not one:
-            break
-    
-        i -= 1
-        
-    if one:
-        digits.insert(0, one)
-        
-    return digits
-
-arr1 = [1,0,1,2]
-arr2 = [9,9,9]
-
-print(plusOne2(arr1))
-print(plusOne2(arr2))
+if __name__ == "__main__":
+    numbers = input("Enter a number: ")
+    digits = [int(x) for x in numbers]
+    result = PlusOne2(digits.copy())
+    print("Plus one to {}, received {}".format(digits, result))
